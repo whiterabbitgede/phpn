@@ -1,0 +1,16 @@
+services:
+  # php8.2:
+  #   build: ./php8.2
+  #   ports:
+  #     - "80:80"
+
+  markicob:
+    build: ./markicob
+    ports:
+      - "80:80"
+
+
+
+
+# docker-compose up -d  --build
+
