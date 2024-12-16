@@ -45,8 +45,10 @@ USER nginx
 
 EXPOSE 80
 
+CMD /usr/sbin/php-fpm8.3 --fpm-config /etc/php/8.3/fpm/php-fpm.conf && nginx -g 'daemon off;' 
+
 # CMD ["/bin/sh" "-c" "/usr/sbin/php-fpm8.3 --fpm-config /etc/php/8.3/fpm/php-fpm.conf  && nginx -g 'daemon off;'"]
-CMD /usr/sbin/php-fpm8.3 --fpm-config /etc/php/8.3/fpm/php-fpm.conf && nginx -g 'daemon off;
+# CMD /usr/sbin/php-fpm8.3 --fpm-config /etc/php/8.3/fpm/php-fpm.conf && nginx -g 'daemon off;' 
 # CMD service php8.3-fpm start  && nginx -g 'daemon off;'
 
 
