@@ -3,6 +3,7 @@ FROM nginx:1.22
 # Install for debug
 RUN apt-get update  && \
     apt-get install -y wget telnet nano vim net-tools procps mlocate  && \
+    apt-get install -y nfs-common && \
     updatedb 
 
 RUN wget https://packages.sury.org/php/apt.gpg -O /usr/share/keyrings/deb.sury.org-php.gpg  && \
@@ -41,6 +42,19 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY default.conf /etc/nginx/conf.d/default.conf 
 
+RUN echo "short_open_tag = On" >> /etc/php/5.6/cli/php.ini && \
+    echo "short_open_tag = On" >> /etc/php/5.6/fpm/php.ini
+
+RUN mkdir -p /var/www/html/nfs && \
+    echo "test file" >> /var/www/html/nfs/test.txt && \
+    chown 1001:1001 -R /var/www/html/nfs && \
+    chmod 755 -R /var/www/html/nfs
+     
+    #echo "10.190.1.30:/data/namespace1 /var/www/html/nfs nfs defaults,nolock,_netdev 0 0" >> /etc/fstab 
+    #mount -a
+#- for pod mount
+#mount -o nolock  10.190.1.30:/data/namespace1 /var/www/html/nfs
+
 USER nginx
 
 EXPOSE 80
@@ -52,5 +66,5 @@ CMD /usr/sbin/php-fpm5.6 --fpm-config /etc/php/5.6/fpm/php-fpm.conf && nginx -g 
 # CMD service php5.6-fpm start  && nginx -g 'daemon off;'
 
 
-# docker build -t phpn-php5.6:0.0.3 .
+# docker build -t phpn-php5.6:0.0.5 .
 # docker run -it -p 80:80 phpn-php5.6:0.0.1 /bin/bash

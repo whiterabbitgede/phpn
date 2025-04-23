@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y wget telnet nano vim net-tools procps s
 
 # RUN  echo "deb http://archive.debian.org/ sarge main" > /etc/apt/sources.list.d/archive.debian.org.list
 
+# https://archive.debian.org/debian/pool/main/n/nginx/
+# http://archive.debian.org/debian/pool/main/n/nginx/
+
+
 # RUN apt-cache pkgnames | grep php4
 
 RUN apt-get install -y php4 php4-mysql php4-pgsql php4-xml  php4-sqlite php4-mcrypt php4-imap php4-gd  php4-pear php4-cli php4-common php4-gd php4-curl php4-dev

@@ -41,6 +41,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY default.conf /etc/nginx/conf.d/default.conf 
 
+RUN echo "short_open_tag = On" >> /etc/php/5.6/cli/php.ini && \
+    echo "short_open_tag = On" >> /etc/php/5.6/fpm/php.ini
+
 USER nginx
 
 EXPOSE 80

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php43-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php43-app
+  template:
+    metadata:
+      labels:
+        app: php43-app
+    spec:
+      containers:
+      - name: php43-container
+        image: localhost:5000/phpn-php4.3:0.0.1
+        ports:
+        - containerPort: 80 # Assuming php43 runs on port 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php43-service
+spec:
+  selector:
+    app: php43-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
